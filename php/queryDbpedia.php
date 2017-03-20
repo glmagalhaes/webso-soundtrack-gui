@@ -188,7 +188,7 @@ function generateMovieList()
           if($searchOmdb == 'true')
             $year = getInfoFromOMDb($movie_reduc);
           else
-            $year = "Não Encontrado";
+            $year = "Erro";
         }
       }
       
@@ -202,7 +202,7 @@ function generateMovieList()
       $movie_slash = addslashes($movie_reduc);
       
       //Gera a div com o nome e ano do filme
-      echo "<div class='item-movie' onClick=\"getSoundtrack('".$movie_slash."','".$year."');\">".$movie_reduc." | Ano:<b> $year </b></div>";
+      echo "<div class='item-movie' onClick=\"getSoundtrack('".$movie_slash."','".$year."');\"><span>".$movie_reduc."&nbsp;| </span><span>&nbsp;".$year."</span></div>";
       
       if($show_desc)
       {
@@ -247,15 +247,33 @@ function getMovieDescriptionFromAbstract($code)
 }
 function getMovieYearFromAbstract($code, $movieNameReduced)
 {
-  $descs = $GLOBALS['lista_de_desc'];
-  $full_desc = $descs[$code];
-  $initial_pos = strlen($movieNameReduced) + 5;
-  $year = "";
-  for($i=0; $i < 5; $i++)
-  {
-    $year .= $full_desc[$initial_pos + $i];
-  }
+//   $descs = $GLOBALS['lista_de_desc'];
+//   $full_desc = $descs[$code];
+//   $initial_pos = strlen($movieNameReduced) + 5;
+//   $year = "";
+//   for($i=0; $i < 5; $i++)
+//   {
+//     $year .= $full_desc[$initial_pos + $i];
+//   }
 
+  $found_isa = "is a";
+  $search_desc = $GLOBALS['lista_de_desc'][$code];
+  $year ="";
+  
+  $pos_isa = strpos($search_desc, $found_isa);
+  
+  if($pos_isa === false){
+      return $year;
+  }
+  else{
+      
+      for($i=0; $i < 5; $i++)
+      {
+         $year .= $search_desc[$pos_isa + 5 + $i];
+      }
+      
+  }
+  
   return $year;
 }
 function getInfoFromOMDb($movieName)
@@ -312,22 +330,22 @@ function getInfoFromOMDb($movieName)
     <div class='actions'>
       <button type="button" onclick="showResumo();" class='action-btn'>Mostrar Resumo</button>
     </div>
-     <div class="container">
+     <div class="container-fluid main-page">
        <div class="row">
-         <div class="col-md-6">
-           <div class="resultados">
+         <div class="col-md-6 resultados">
+           <div>
              <ul class="list-group">
                <?php generateMovieList(); ?>
              </ul>
            </div>
          </div>
-         <div class="col-md-6">
-            <span class='soundtracks-header'>Soundtracks</span>
-            <div class = 'soundtrack-results'>
-              
+         <div class="col-md-6 soundtrack-results">
+            <span class = 'soundtracks-header'>Soundtracks</span><br>
+            <span class = 'showingFor'>Nenhuma soundtrack para mostrar</span>
+            <div id="sountrack-list" role="tablist" class="col-xs-12 panel-group">
+                
             </div>
          </div>
-
        </div>
      </div>
 

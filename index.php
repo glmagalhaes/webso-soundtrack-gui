@@ -7,6 +7,7 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <link rel="stylesheet" href="css/style.css" type="text/css" />
     <script type="text/javascript" src="/js/soundtrackFinder.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>
   </head>
   <body>
     <div class='main-img'>
