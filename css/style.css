@@ -246,3 +246,8 @@ html, body
 .external-link a:active{
   color: #fff;
 }
+.spot{
+  width: 125px;
+  display: block;
+  margin: 10px auto;
+}

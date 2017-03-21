@@ -15,7 +15,7 @@ function getSoundtrack(movieName, movieYear)
             $('#sountrack-list').append('<div class="track-item" data-toggle="collapse" data-target="#collapse'
             +index+'" data-parent="#sountrack-list" href="#collapse'
             +index+'" aria-expanded="true" aria-controls="collapse'
-            +index+'" id="'+track.title+'"><span>'
+            +index+'" id="'+track.title+'|'+track.performers+'"><span>'
             +capitalize(track.title)
             +'</span><span class="item-artist">'+track.performers+'</span></div>');
         });
@@ -87,13 +87,13 @@ function searchTrack($this) {
         $($this).children(".cover").toggle(100);
         return false;
     }
-    /*id = ($this.id).split('|');
+    id = ($this.id).split('|');
     track =  id[0]; //id é o nome da track
-    artist = id[1];
-    console.log(track);
-    console.log(artist);
-    query = 'track:'+track+'artist:'+artist;*/
-    query = $this.id;
+    artist = id[1].replace(", ","");
+    //query = 'track:'+track+'artist:'+artist;
+    
+    //query = $this.id;
+    query = 'track:'+track+' artist:'+artist;
     href  = $($this).attr('href').replace('#','');
     $.ajax({
         url: 'https://api.spotify.com/v1/search',
@@ -109,7 +109,7 @@ function searchTrack($this) {
                 var id = track.items[0].id;
                 var link = track.items[0].external_urls.spotify //acho que assim tu pega o link da musica no spotify, seria interessante deixar esse link disponivel pro usuario junto com o player..
                 $($this).addClass('listed');
-                $($this).append('<div style="background-image:url('+img+');" id="'+href+'" data-track-id="'+id+'" class="cover track collapse" role="tabpanel"></div><div class="external-link"><a href="'+link+'" target="_blank">ouça no Spotfy</a></div>');
+                $($this).append('<div style="background-image:url('+img+');" id="'+href+'" data-track-id="'+id+'" class="cover track collapse" role="tabpanel"></div><div class="external-link"><a href="'+link+'" target="_blank"><img src="../css/spot.png" class="spot"></a></div>');
                 $('#'+href).append("<div class='play-gfx'></div>");
                 executar();
                 console.log("Buscando e criando cover: " + id);
