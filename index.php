@@ -16,7 +16,7 @@
   <div class='main-form'>
     <form class="myform" action="php/queryDbpedia.php" method="get">
       <input id="nameInput" type="text" name="searchName" placeholder="Digite o nome..."><br><br>
-      <input type="radio" id="search-radio" name="searchParam" value="Diretor"/>Diretor
+      <input type="radio" id="search-radio" name="searchParam" value="Diretor" checked="checked"/>Diretor
       <input type="radio" name="searchParam" value="Ator"/>Ator<br>
       <input type="checkbox" name="omdb" value='true'>Procurar no OMDb?<br><br>
       <input type="submit" onclick = 'hideForm();' class="procura-btn" value="Procurar">

@@ -328,7 +328,7 @@ function getInfoFromOMDb($movieName)
    </head>
    <body>
     <div class='actions'>
-      <button type="button" onclick="showResumo();" class='action-btn'>Mostrar Resumo</button>
+      <button type="button" onclick="showResumo();" class='action-btn'></button>
     </div>
      <div class="container-fluid main-page">
        <div class="row">
